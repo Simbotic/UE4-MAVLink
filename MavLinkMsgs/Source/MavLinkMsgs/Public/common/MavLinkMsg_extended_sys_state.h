@@ -11,6 +11,7 @@ struct MAVLINKMSGS_API FMavlinkMsg_extended_sys_state
 {
     GENERATED_BODY()
 
+    static const uint32 MsgId = 245;
     /*The VTOL state if applicable. Is set to MAV_VTOL_STATE_UNDEFINED if UAV is not in VTOL configuration. */
     UPROPERTY()
     uint8 vtol_state;

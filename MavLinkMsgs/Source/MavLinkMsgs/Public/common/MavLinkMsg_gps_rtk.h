@@ -11,6 +11,7 @@ struct MAVLINKMSGS_API FMavlinkMsg_gps_rtk
 {
     GENERATED_BODY()
 
+    static const uint32 MsgId = 127;
     /*Time since boot of last baseline message received. [ms]*/
     UPROPERTY()
     uint32 time_last_baseline_ms;

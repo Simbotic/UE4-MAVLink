@@ -11,6 +11,7 @@ struct MAVLINKMSGS_API FMavlinkMsg_play_tune
 {
     GENERATED_BODY()
 
+    static const uint32 MsgId = 258;
     /*System ID */
     UPROPERTY()
     uint8 target_system;

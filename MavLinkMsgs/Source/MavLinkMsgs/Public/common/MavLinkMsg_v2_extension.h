@@ -11,6 +11,7 @@ struct MAVLINKMSGS_API FMavlinkMsg_v2_extension
 {
     GENERATED_BODY()
 
+    static const uint32 MsgId = 248;
     /*Network ID (0 for broadcast) */
     UPROPERTY()
     uint8 target_network;

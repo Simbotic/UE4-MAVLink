@@ -11,6 +11,7 @@ struct MAVLINKMSGS_API FMavlinkMsg_safety_set_allowed_area
 {
     GENERATED_BODY()
 
+    static const uint32 MsgId = 54;
     /*System ID */
     UPROPERTY()
     uint8 target_system;

@@ -11,6 +11,7 @@ struct MAVLINKMSGS_API FMavlinkMsg_setup_signing
 {
     GENERATED_BODY()
 
+    static const uint32 MsgId = 256;
     /*system id of the target */
     UPROPERTY()
     uint8 target_system;

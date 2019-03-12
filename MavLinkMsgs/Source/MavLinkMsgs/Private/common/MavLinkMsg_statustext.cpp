@@ -2,6 +2,8 @@
 #include "MavLinkMsg_statustext.h"
 #include "common/mavlink.h"
 
+
+
 void FMavlinkMsg_statustext::Serialize(uint8 systemId, uint8 componentId, __mavlink_message& msg, uint16& packSize)
 {
     packSize = mavlink_msg_statustext_pack(systemId, componentId, &msg,  severity, (char*)text);
@@ -11,7 +13,7 @@ void FMavlinkMsg_statustext::Serialize(uint8 systemId, uint8 componentId, TShare
 {
     uint16 size;
     __mavlink_message msg;
-    Serialize(systemId, componentId, msg, size);
+    Serialize(systemId, componentId,    msg, size);
     buffer->SetNum(size);
     mavlink_msg_to_send_buffer(buffer->GetData(), &msg);
 }

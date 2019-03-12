@@ -11,6 +11,7 @@ struct MAVLINKMSGS_API FMavlinkMsg_cellular_status
 {
     GENERATED_BODY()
 
+    static const uint32 MsgId = 334;
     /*Status bitmap */
     UPROPERTY()
     uint16 status;

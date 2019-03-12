@@ -11,6 +11,7 @@ struct MAVLINKMSGS_API FMavlinkMsg_log_data
 {
     GENERATED_BODY()
 
+    static const uint32 MsgId = 120;
     /*Log id (from LOG_ENTRY reply) */
     UPROPERTY()
     uint16 id;

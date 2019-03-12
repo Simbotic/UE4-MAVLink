@@ -11,6 +11,7 @@ struct MAVLINKMSGS_API FMavlinkMsg_vfr_hud
 {
     GENERATED_BODY()
 
+    static const uint32 MsgId = 74;
     /*Current indicated airspeed (IAS). [m/s]*/
     UPROPERTY()
     float airspeed;

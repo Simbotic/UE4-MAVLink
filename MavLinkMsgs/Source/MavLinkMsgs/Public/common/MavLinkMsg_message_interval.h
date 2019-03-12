@@ -11,6 +11,7 @@ struct MAVLINKMSGS_API FMavlinkMsg_message_interval
 {
     GENERATED_BODY()
 
+    static const uint32 MsgId = 244;
     /*The ID of the requested MAVLink message. v1.0 is limited to 254 messages. */
     UPROPERTY()
     uint16 message_id;

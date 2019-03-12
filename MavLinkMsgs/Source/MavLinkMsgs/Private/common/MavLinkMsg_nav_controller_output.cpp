@@ -2,6 +2,8 @@
 #include "MavLinkMsg_nav_controller_output.h"
 #include "common/mavlink.h"
 
+
+
 void FMavlinkMsg_nav_controller_output::Serialize(uint8 systemId, uint8 componentId, __mavlink_message& msg, uint16& packSize)
 {
     packSize = mavlink_msg_nav_controller_output_pack(systemId, componentId, &msg,  nav_roll, nav_pitch, nav_bearing, target_bearing, wp_dist, alt_error, aspd_error, xtrack_error);
@@ -11,7 +13,7 @@ void FMavlinkMsg_nav_controller_output::Serialize(uint8 systemId, uint8 componen
 {
     uint16 size;
     __mavlink_message msg;
-    Serialize(systemId, componentId, msg, size);
+    Serialize(systemId, componentId,    msg, size);
     buffer->SetNum(size);
     mavlink_msg_to_send_buffer(buffer->GetData(), &msg);
 }

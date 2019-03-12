@@ -11,6 +11,7 @@ struct MAVLINKMSGS_API FMavlinkMsg_smart_battery_info
 {
     GENERATED_BODY()
 
+    static const uint32 MsgId = 370;
     /*Battery ID */
     UPROPERTY()
     uint8 id;

@@ -2,6 +2,8 @@
 #include "MavLinkMsg_manual_setpoint.h"
 #include "common/mavlink.h"
 
+
+
 void FMavlinkMsg_manual_setpoint::Serialize(uint8 systemId, uint8 componentId, __mavlink_message& msg, uint16& packSize)
 {
     packSize = mavlink_msg_manual_setpoint_pack(systemId, componentId, &msg,  time_boot_ms, roll, pitch, yaw, thrust, mode_switch, manual_override_switch);
@@ -11,7 +13,7 @@ void FMavlinkMsg_manual_setpoint::Serialize(uint8 systemId, uint8 componentId, T
 {
     uint16 size;
     __mavlink_message msg;
-    Serialize(systemId, componentId, msg, size);
+    Serialize(systemId, componentId,    msg, size);
     buffer->SetNum(size);
     mavlink_msg_to_send_buffer(buffer->GetData(), &msg);
 }

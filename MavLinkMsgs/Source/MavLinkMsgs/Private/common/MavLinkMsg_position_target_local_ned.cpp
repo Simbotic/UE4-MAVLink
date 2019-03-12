@@ -2,6 +2,8 @@
 #include "MavLinkMsg_position_target_local_ned.h"
 #include "common/mavlink.h"
 
+
+
 void FMavlinkMsg_position_target_local_ned::Serialize(uint8 systemId, uint8 componentId, __mavlink_message& msg, uint16& packSize)
 {
     packSize = mavlink_msg_position_target_local_ned_pack(systemId, componentId, &msg,  time_boot_ms, coordinate_frame, type_mask, x, y, z, vx, vy, vz, afx, afy, afz, yaw, yaw_rate);
@@ -11,7 +13,7 @@ void FMavlinkMsg_position_target_local_ned::Serialize(uint8 systemId, uint8 comp
 {
     uint16 size;
     __mavlink_message msg;
-    Serialize(systemId, componentId, msg, size);
+    Serialize(systemId, componentId,    msg, size);
     buffer->SetNum(size);
     mavlink_msg_to_send_buffer(buffer->GetData(), &msg);
 }

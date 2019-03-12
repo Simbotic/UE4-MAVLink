@@ -11,6 +11,7 @@ struct MAVLINKMSGS_API FMavlinkMsg_sys_status
 {
     GENERATED_BODY()
 
+    static const uint32 MsgId = 1;
     /*Bitmap showing which onboard controllers and sensors are present. Value of 0: not present. Value of 1: present. */
     UPROPERTY()
     uint32 onboard_control_sensors_present;

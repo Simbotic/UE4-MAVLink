@@ -2,6 +2,8 @@
 #include "MavLinkMsg_smart_battery_info.h"
 #include "common/mavlink.h"
 
+
+
 void FMavlinkMsg_smart_battery_info::Serialize(uint8 systemId, uint8 componentId, __mavlink_message& msg, uint16& packSize)
 {
     packSize = mavlink_msg_smart_battery_info_pack(systemId, componentId, &msg,  id, capacity_full_specification, capacity_full, cycle_count, serial_number, (char*)device_name, weight, discharge_minimum_voltage, charging_minimum_voltage, resting_minimum_voltage);
@@ -11,7 +13,7 @@ void FMavlinkMsg_smart_battery_info::Serialize(uint8 systemId, uint8 componentId
 {
     uint16 size;
     __mavlink_message msg;
-    Serialize(systemId, componentId, msg, size);
+    Serialize(systemId, componentId,    msg, size);
     buffer->SetNum(size);
     mavlink_msg_to_send_buffer(buffer->GetData(), &msg);
 }

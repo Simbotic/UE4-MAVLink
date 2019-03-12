@@ -11,6 +11,7 @@ struct MAVLINKMSGS_API FMavlinkMsg_serial_control
 {
     GENERATED_BODY()
 
+    static const uint32 MsgId = 126;
     /*Serial control device type. */
     UPROPERTY()
     uint8 device;

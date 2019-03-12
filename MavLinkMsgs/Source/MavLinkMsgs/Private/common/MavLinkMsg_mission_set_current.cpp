@@ -2,6 +2,8 @@
 #include "MavLinkMsg_mission_set_current.h"
 #include "common/mavlink.h"
 
+
+
 void FMavlinkMsg_mission_set_current::Serialize(uint8 systemId, uint8 componentId, __mavlink_message& msg, uint16& packSize)
 {
     packSize = mavlink_msg_mission_set_current_pack(systemId, componentId, &msg,  target_system, target_component, seq);
@@ -11,7 +13,7 @@ void FMavlinkMsg_mission_set_current::Serialize(uint8 systemId, uint8 componentI
 {
     uint16 size;
     __mavlink_message msg;
-    Serialize(systemId, componentId, msg, size);
+    Serialize(systemId, componentId,    msg, size);
     buffer->SetNum(size);
     mavlink_msg_to_send_buffer(buffer->GetData(), &msg);
 }

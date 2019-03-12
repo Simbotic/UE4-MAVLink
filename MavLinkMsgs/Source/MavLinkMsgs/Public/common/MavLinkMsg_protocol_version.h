@@ -11,6 +11,7 @@ struct MAVLINKMSGS_API FMavlinkMsg_protocol_version
 {
     GENERATED_BODY()
 
+    static const uint32 MsgId = 300;
     /*Currently active MAVLink version number * 100: v1.0 is 100, v2.0 is 200, etc. */
     UPROPERTY()
     uint16 version;

@@ -11,6 +11,7 @@ struct MAVLINKMSGS_API FMavlinkMsg_adsb_vehicle
 {
     GENERATED_BODY()
 
+    static const uint32 MsgId = 246;
     /*ICAO address */
     UPROPERTY()
     uint32 ICAO_address;

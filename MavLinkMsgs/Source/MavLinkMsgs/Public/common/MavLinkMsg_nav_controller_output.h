@@ -11,6 +11,7 @@ struct MAVLINKMSGS_API FMavlinkMsg_nav_controller_output
 {
     GENERATED_BODY()
 
+    static const uint32 MsgId = 62;
     /*Current desired roll [deg]*/
     UPROPERTY()
     float nav_roll;

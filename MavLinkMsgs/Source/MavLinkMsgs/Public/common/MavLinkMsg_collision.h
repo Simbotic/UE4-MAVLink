@@ -11,6 +11,7 @@ struct MAVLINKMSGS_API FMavlinkMsg_collision
 {
     GENERATED_BODY()
 
+    static const uint32 MsgId = 247;
     /*Collision data source */
     UPROPERTY()
     uint8 src;

@@ -11,6 +11,7 @@ struct MAVLINKMSGS_API FMavlinkMsg_rc_channels_raw
 {
     GENERATED_BODY()
 
+    static const uint32 MsgId = 35;
     /*Timestamp (time since system boot). [ms]*/
     UPROPERTY()
     uint32 time_boot_ms;

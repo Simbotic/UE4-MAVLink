@@ -11,6 +11,7 @@ struct MAVLINKMSGS_API FMavlinkMsg_data_transmission_handshake
 {
     GENERATED_BODY()
 
+    static const uint32 MsgId = 130;
     /*Type of requested/acknowledged data. */
     UPROPERTY()
     uint8 type;

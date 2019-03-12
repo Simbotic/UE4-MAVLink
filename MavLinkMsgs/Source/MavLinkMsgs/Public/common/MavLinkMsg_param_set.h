@@ -11,6 +11,7 @@ struct MAVLINKMSGS_API FMavlinkMsg_param_set
 {
     GENERATED_BODY()
 
+    static const uint32 MsgId = 23;
     /*System ID */
     UPROPERTY()
     uint8 target_system;

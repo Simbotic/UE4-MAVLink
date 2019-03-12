@@ -11,6 +11,7 @@ struct MAVLINKMSGS_API FMavlinkMsg_scaled_imu3
 {
     GENERATED_BODY()
 
+    static const uint32 MsgId = 129;
     /*Timestamp (time since system boot). [ms]*/
     UPROPERTY()
     uint32 time_boot_ms;

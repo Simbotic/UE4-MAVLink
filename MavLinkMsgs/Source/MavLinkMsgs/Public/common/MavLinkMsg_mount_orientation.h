@@ -11,6 +11,7 @@ struct MAVLINKMSGS_API FMavlinkMsg_mount_orientation
 {
     GENERATED_BODY()
 
+    static const uint32 MsgId = 265;
     /*Timestamp (time since system boot). [ms]*/
     UPROPERTY()
     uint32 time_boot_ms;

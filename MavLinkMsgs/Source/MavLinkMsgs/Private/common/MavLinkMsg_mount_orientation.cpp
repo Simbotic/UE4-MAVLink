@@ -2,6 +2,8 @@
 #include "MavLinkMsg_mount_orientation.h"
 #include "common/mavlink.h"
 
+
+
 void FMavlinkMsg_mount_orientation::Serialize(uint8 systemId, uint8 componentId, __mavlink_message& msg, uint16& packSize)
 {
     packSize = mavlink_msg_mount_orientation_pack(systemId, componentId, &msg,  time_boot_ms, roll, pitch, yaw, yaw_absolute);
@@ -11,7 +13,7 @@ void FMavlinkMsg_mount_orientation::Serialize(uint8 systemId, uint8 componentId,
 {
     uint16 size;
     __mavlink_message msg;
-    Serialize(systemId, componentId, msg, size);
+    Serialize(systemId, componentId,    msg, size);
     buffer->SetNum(size);
     mavlink_msg_to_send_buffer(buffer->GetData(), &msg);
 }

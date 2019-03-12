@@ -11,6 +11,7 @@ struct MAVLINKMSGS_API FMavlinkMsg_high_latency
 {
     GENERATED_BODY()
 
+    static const uint32 MsgId = 234;
     /*Bitmap of enabled system modes. */
     UPROPERTY()
     uint8 base_mode;

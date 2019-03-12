@@ -11,6 +11,7 @@ struct MAVLINKMSGS_API FMavlinkMsg_video_stream_status
 {
     GENERATED_BODY()
 
+    static const uint32 MsgId = 270;
     /*Video Stream ID (1 for first, 2 for second, etc.) */
     UPROPERTY()
     uint8 stream_id;

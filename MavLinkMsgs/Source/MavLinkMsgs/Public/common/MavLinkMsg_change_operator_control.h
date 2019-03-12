@@ -11,6 +11,7 @@ struct MAVLINKMSGS_API FMavlinkMsg_change_operator_control
 {
     GENERATED_BODY()
 
+    static const uint32 MsgId = 5;
     /*System the GCS requests control for */
     UPROPERTY()
     uint8 target_system;

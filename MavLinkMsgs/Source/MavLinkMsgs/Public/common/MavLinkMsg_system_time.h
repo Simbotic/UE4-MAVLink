@@ -11,6 +11,7 @@ struct MAVLINKMSGS_API FMavlinkMsg_system_time
 {
     GENERATED_BODY()
 
+    static const uint32 MsgId = 2;
     /*Timestamp (UNIX epoch time). [us]*/
     UPROPERTY()
     uint64 time_unix_usec;

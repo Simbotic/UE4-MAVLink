@@ -11,6 +11,7 @@ struct MAVLINKMSGS_API FMavlinkMsg_auth_key
 {
     GENERATED_BODY()
 
+    static const uint32 MsgId = 7;
     /*key */
     UPROPERTY()
     uint8 key[32];

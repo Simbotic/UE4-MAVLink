@@ -11,6 +11,7 @@ struct MAVLINKMSGS_API FMavlinkMsg_terrain_report
 {
     GENERATED_BODY()
 
+    static const uint32 MsgId = 136;
     /*Latitude [degE7]*/
     UPROPERTY()
     int32 lat;

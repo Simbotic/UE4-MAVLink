@@ -11,6 +11,7 @@ struct MAVLINKMSGS_API FMavlinkMsg_safety_allowed_area
 {
     GENERATED_BODY()
 
+    static const uint32 MsgId = 55;
     /*Coordinate frame. Can be either global, GPS, right-handed with Z axis up or local, right handed, Z axis down. */
     UPROPERTY()
     uint8 frame;

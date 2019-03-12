@@ -11,6 +11,7 @@ struct MAVLINKMSGS_API FMavlinkMsg_command_ack
 {
     GENERATED_BODY()
 
+    static const uint32 MsgId = 77;
     /*Command ID (of acknowledged command). */
     UPROPERTY()
     uint16 command;

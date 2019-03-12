@@ -2,6 +2,8 @@
 #include "MavLinkMsg_global_position_int.h"
 #include "common/mavlink.h"
 
+
+
 void FMavlinkMsg_global_position_int::Serialize(uint8 systemId, uint8 componentId, __mavlink_message& msg, uint16& packSize)
 {
     packSize = mavlink_msg_global_position_int_pack(systemId, componentId, &msg,  time_boot_ms, lat, lon, alt, relative_alt, vx, vy, vz, hdg);
@@ -11,7 +13,7 @@ void FMavlinkMsg_global_position_int::Serialize(uint8 systemId, uint8 componentI
 {
     uint16 size;
     __mavlink_message msg;
-    Serialize(systemId, componentId, msg, size);
+    Serialize(systemId, componentId,    msg, size);
     buffer->SetNum(size);
     mavlink_msg_to_send_buffer(buffer->GetData(), &msg);
 }

@@ -11,6 +11,7 @@ struct MAVLINKMSGS_API FMavlinkMsg_gps_global_origin
 {
     GENERATED_BODY()
 
+    static const uint32 MsgId = 49;
     /*Latitude (WGS84) [degE7]*/
     UPROPERTY()
     int32 latitude;

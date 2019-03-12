@@ -11,6 +11,7 @@ struct MAVLINKMSGS_API FMavlinkMsg_set_gps_global_origin
 {
     GENERATED_BODY()
 
+    static const uint32 MsgId = 48;
     /*System ID */
     UPROPERTY()
     uint8 target_system;

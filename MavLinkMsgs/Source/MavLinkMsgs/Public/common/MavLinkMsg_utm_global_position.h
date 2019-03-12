@@ -11,6 +11,7 @@ struct MAVLINKMSGS_API FMavlinkMsg_utm_global_position
 {
     GENERATED_BODY()
 
+    static const uint32 MsgId = 340;
     /*Time of applicability of position (microseconds since UNIX epoch). [us]*/
     UPROPERTY()
     uint64 time;

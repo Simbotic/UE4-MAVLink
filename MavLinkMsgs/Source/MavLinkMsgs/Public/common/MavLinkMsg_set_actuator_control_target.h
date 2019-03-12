@@ -11,6 +11,7 @@ struct MAVLINKMSGS_API FMavlinkMsg_set_actuator_control_target
 {
     GENERATED_BODY()
 
+    static const uint32 MsgId = 139;
     /*Timestamp (UNIX Epoch time or time since system boot). The receiving end can infer timestamp format (since 1.1.1970 or since system boot) by checking for the magnitude the number. [us]*/
     UPROPERTY()
     uint64 time_usec;

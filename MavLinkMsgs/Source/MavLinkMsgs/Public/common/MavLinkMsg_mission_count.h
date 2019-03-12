@@ -11,6 +11,7 @@ struct MAVLINKMSGS_API FMavlinkMsg_mission_count
 {
     GENERATED_BODY()
 
+    static const uint32 MsgId = 44;
     /*System ID */
     UPROPERTY()
     uint8 target_system;

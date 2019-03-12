@@ -11,6 +11,7 @@ struct MAVLINKMSGS_API FMavlinkMsg_vision_position_estimate
 {
     GENERATED_BODY()
 
+    static const uint32 MsgId = 102;
     /*Timestamp (UNIX time or time since system boot) [us]*/
     UPROPERTY()
     uint64 usec;

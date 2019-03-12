@@ -11,6 +11,7 @@ struct MAVLINKMSGS_API FMavlinkMsg_radio_status
 {
     GENERATED_BODY()
 
+    static const uint32 MsgId = 109;
     /*Local (message sender) recieved signal strength indication in device-dependent units/scale. Values: [0-254], 255: invalid/unknown. */
     UPROPERTY()
     uint8 rssi;

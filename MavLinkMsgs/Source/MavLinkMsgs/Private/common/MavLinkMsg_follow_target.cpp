@@ -2,6 +2,8 @@
 #include "MavLinkMsg_follow_target.h"
 #include "common/mavlink.h"
 
+
+
 void FMavlinkMsg_follow_target::Serialize(uint8 systemId, uint8 componentId, __mavlink_message& msg, uint16& packSize)
 {
     packSize = mavlink_msg_follow_target_pack(systemId, componentId, &msg,  timestamp, est_capabilities, lat, lon, alt, vel, acc, attitude_q, rates, position_cov, custom_state);
@@ -11,7 +13,7 @@ void FMavlinkMsg_follow_target::Serialize(uint8 systemId, uint8 componentId, TSh
 {
     uint16 size;
     __mavlink_message msg;
-    Serialize(systemId, componentId, msg, size);
+    Serialize(systemId, componentId,    msg, size);
     buffer->SetNum(size);
     mavlink_msg_to_send_buffer(buffer->GetData(), &msg);
 }

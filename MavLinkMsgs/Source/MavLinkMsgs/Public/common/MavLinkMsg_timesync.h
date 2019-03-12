@@ -11,6 +11,7 @@ struct MAVLINKMSGS_API FMavlinkMsg_timesync
 {
     GENERATED_BODY()
 
+    static const uint32 MsgId = 111;
     /*Time sync timestamp 1 */
     UPROPERTY()
     int64 tc1;

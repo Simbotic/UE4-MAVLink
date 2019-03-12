@@ -11,6 +11,7 @@ struct MAVLINKMSGS_API FMavlinkMsg_command_long
 {
     GENERATED_BODY()
 
+    static const uint32 MsgId = 76;
     /*System which should execute the command */
     UPROPERTY()
     uint8 target_system;

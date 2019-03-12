@@ -11,6 +11,7 @@ struct MAVLINKMSGS_API FMavlinkMsg_request_data_stream
 {
     GENERATED_BODY()
 
+    static const uint32 MsgId = 66;
     /*The target requested to send the message stream. */
     UPROPERTY()
     uint8 target_system;

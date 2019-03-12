@@ -11,6 +11,7 @@ struct MAVLINKMSGS_API FMavlinkMsg_position_target_local_ned
 {
     GENERATED_BODY()
 
+    static const uint32 MsgId = 85;
     /*Timestamp (time since system boot). [ms]*/
     UPROPERTY()
     uint32 time_boot_ms;

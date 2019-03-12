@@ -11,6 +11,7 @@ struct MAVLINKMSGS_API FMavlinkMsg_rc_channels_override
 {
     GENERATED_BODY()
 
+    static const uint32 MsgId = 70;
     /*System ID */
     UPROPERTY()
     uint8 target_system;
