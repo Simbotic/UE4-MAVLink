@@ -40,7 +40,9 @@ public class MavLinkUE4 : ModuleRules
 				"SlateCore",
                 "Sockets",
                 "Networking",
-                "MavLinkMsgs"
+                "MavLinkMsgs",
+                "mavlink_c",
+                "JsonUtilities"
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);

@@ -13,8 +13,7 @@
 class FUdpSocketReceiver;
 class FUdpSocketSender;
 class FSocket;
-
-
+struct __mavlink_message;
 
 /**
  * 
@@ -24,14 +23,18 @@ class MAVLINKUE4_API UMavLinkNode : public UObject
 {
 	GENERATED_BODY()
 
+    FUdpSocketReceiver* Receiver;
+    FUdpSocketSender* Sender;
+    FSocket* SocketTx;
+    FSocket* SocketRx;
+    TQueue<TSharedPtr<__mavlink_message>, EQueueMode::Spsc> MsgQueue;
+
 	public:
 
     UMavLinkNode();
     ~UMavLinkNode();
-	FUdpSocketReceiver* Receiver;
-	FUdpSocketSender* Sender;
-    FSocket* SocketTx;
-    FSocket* SocketRx;
+	
+
 
 	UFUNCTION(BlueprintCallable, Category="Mavlink")
 	void Listen();
@@ -40,5 +43,6 @@ class MAVLINKUE4_API UMavLinkNode : public UObject
 	void OnDataReceivedBP(const TArray<uint8>& data);
 	UFUNCTION(BlueprintCallable, Category = "Mavlink")
 	void SendHeartbeat();
+    void GameTick(ELevelTick, float);
 	
 };
