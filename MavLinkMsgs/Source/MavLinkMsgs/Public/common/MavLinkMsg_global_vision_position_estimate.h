@@ -10,7 +10,7 @@ USTRUCT(BlueprintType)
 struct MAVLINKMSGS_API FMavlinkMsg_global_vision_position_estimate
 {
     GENERATED_BODY()
-
+    
     static const uint32 MsgId = 101;
     /*Timestamp (UNIX time or since system boot) [us]*/
     UPROPERTY()

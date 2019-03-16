@@ -10,7 +10,7 @@ USTRUCT(BlueprintType)
 struct MAVLINKMSGS_API FMavlinkMsg_power_status
 {
     GENERATED_BODY()
-
+    
     static const uint32 MsgId = 125;
     /*5V rail voltage. [mV]*/
     UPROPERTY()

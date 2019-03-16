@@ -20,6 +20,17 @@ void FMavlinkMsg_protocol_version::Serialize(uint8 systemId, uint8 componentId, 
 
 void FMavlinkMsg_protocol_version::Deserialize(const mavlink_message_t& msg)
 {
-
+    #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+        version = mavlink_msg_protocol_version_get_version(msg);
+        min_version = mavlink_msg_protocol_version_get_min_version(msg);
+        max_version = mavlink_msg_protocol_version_get_max_version(msg);
+        spec_version_hash = mavlink_msg_protocol_version_get_spec_version_hash(msg, protocol_version->spec_version_hash);
+        library_version_hash = mavlink_msg_protocol_version_get_library_version_hash(msg, protocol_version->library_version_hash);
+    
+    #else
+        uint8_t len = msg.len < MAVLINK_MSG_ID_PROTOCOL_VERSION_LEN? msg.len : MAVLINK_MSG_ID_PROTOCOL_VERSION_LEN;
+        FMemory::Memset(this, 0, MAVLINK_MSG_ID_PROTOCOL_VERSION_LEN);
+        FMemory::Memcpy(this, _MAV_PAYLOAD(&msg), len);
+    #endif
 }
 

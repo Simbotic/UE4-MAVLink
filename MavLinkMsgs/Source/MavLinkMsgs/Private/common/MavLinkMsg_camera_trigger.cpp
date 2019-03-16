@@ -20,6 +20,14 @@ void FMavlinkMsg_camera_trigger::Serialize(uint8 systemId, uint8 componentId, TS
 
 void FMavlinkMsg_camera_trigger::Deserialize(const mavlink_message_t& msg)
 {
-
+    #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+        time_usec = mavlink_msg_camera_trigger_get_time_usec(msg);
+        seq = mavlink_msg_camera_trigger_get_seq(msg);
+    
+    #else
+        uint8_t len = msg.len < MAVLINK_MSG_ID_CAMERA_TRIGGER_LEN? msg.len : MAVLINK_MSG_ID_CAMERA_TRIGGER_LEN;
+        FMemory::Memset(this, 0, MAVLINK_MSG_ID_CAMERA_TRIGGER_LEN);
+        FMemory::Memcpy(this, _MAV_PAYLOAD(&msg), len);
+    #endif
 }
 

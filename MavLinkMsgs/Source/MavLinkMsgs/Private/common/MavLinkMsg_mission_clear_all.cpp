@@ -20,6 +20,15 @@ void FMavlinkMsg_mission_clear_all::Serialize(uint8 systemId, uint8 componentId,
 
 void FMavlinkMsg_mission_clear_all::Deserialize(const mavlink_message_t& msg)
 {
-
+    #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+        target_system = mavlink_msg_mission_clear_all_get_target_system(msg);
+        target_component = mavlink_msg_mission_clear_all_get_target_component(msg);
+        mission_type = mavlink_msg_mission_clear_all_get_mission_type(msg);
+    
+    #else
+        uint8_t len = msg.len < MAVLINK_MSG_ID_MISSION_CLEAR_ALL_LEN? msg.len : MAVLINK_MSG_ID_MISSION_CLEAR_ALL_LEN;
+        FMemory::Memset(this, 0, MAVLINK_MSG_ID_MISSION_CLEAR_ALL_LEN);
+        FMemory::Memcpy(this, _MAV_PAYLOAD(&msg), len);
+    #endif
 }
 

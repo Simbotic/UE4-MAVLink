@@ -10,7 +10,7 @@ USTRUCT(BlueprintType)
 struct MAVLINKMSGS_API FMavlinkMsg_local_position_ned_system_global_offset
 {
     GENERATED_BODY()
-
+    
     static const uint32 MsgId = 89;
     /*Timestamp (time since system boot). [ms]*/
     UPROPERTY()

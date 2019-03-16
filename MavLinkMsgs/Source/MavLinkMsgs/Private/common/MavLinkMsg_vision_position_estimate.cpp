@@ -20,6 +20,20 @@ void FMavlinkMsg_vision_position_estimate::Serialize(uint8 systemId, uint8 compo
 
 void FMavlinkMsg_vision_position_estimate::Deserialize(const mavlink_message_t& msg)
 {
-
+    #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+        usec = mavlink_msg_vision_position_estimate_get_usec(msg);
+        x = mavlink_msg_vision_position_estimate_get_x(msg);
+        y = mavlink_msg_vision_position_estimate_get_y(msg);
+        z = mavlink_msg_vision_position_estimate_get_z(msg);
+        roll = mavlink_msg_vision_position_estimate_get_roll(msg);
+        pitch = mavlink_msg_vision_position_estimate_get_pitch(msg);
+        yaw = mavlink_msg_vision_position_estimate_get_yaw(msg);
+        covariance = mavlink_msg_vision_position_estimate_get_covariance(msg, vision_position_estimate->covariance);
+    
+    #else
+        uint8_t len = msg.len < MAVLINK_MSG_ID_VISION_POSITION_ESTIMATE_LEN? msg.len : MAVLINK_MSG_ID_VISION_POSITION_ESTIMATE_LEN;
+        FMemory::Memset(this, 0, MAVLINK_MSG_ID_VISION_POSITION_ESTIMATE_LEN);
+        FMemory::Memcpy(this, _MAV_PAYLOAD(&msg), len);
+    #endif
 }
 

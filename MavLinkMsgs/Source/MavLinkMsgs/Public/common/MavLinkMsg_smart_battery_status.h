@@ -10,7 +10,7 @@ USTRUCT(BlueprintType)
 struct MAVLINKMSGS_API FMavlinkMsg_smart_battery_status
 {
     GENERATED_BODY()
-
+    
     static const uint32 MsgId = 371;
     /*Battery ID */
     UPROPERTY()

@@ -20,6 +20,24 @@ void FMavlinkMsg_autopilot_version::Serialize(uint8 systemId, uint8 componentId,
 
 void FMavlinkMsg_autopilot_version::Deserialize(const mavlink_message_t& msg)
 {
-
+    #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+        capabilities = mavlink_msg_autopilot_version_get_capabilities(msg);
+        uid = mavlink_msg_autopilot_version_get_uid(msg);
+        flight_sw_version = mavlink_msg_autopilot_version_get_flight_sw_version(msg);
+        middleware_sw_version = mavlink_msg_autopilot_version_get_middleware_sw_version(msg);
+        os_sw_version = mavlink_msg_autopilot_version_get_os_sw_version(msg);
+        board_version = mavlink_msg_autopilot_version_get_board_version(msg);
+        vendor_id = mavlink_msg_autopilot_version_get_vendor_id(msg);
+        product_id = mavlink_msg_autopilot_version_get_product_id(msg);
+        flight_custom_version = mavlink_msg_autopilot_version_get_flight_custom_version(msg, autopilot_version->flight_custom_version);
+        middleware_custom_version = mavlink_msg_autopilot_version_get_middleware_custom_version(msg, autopilot_version->middleware_custom_version);
+        os_custom_version = mavlink_msg_autopilot_version_get_os_custom_version(msg, autopilot_version->os_custom_version);
+        uid2 = mavlink_msg_autopilot_version_get_uid2(msg, autopilot_version->uid2);
+    
+    #else
+        uint8_t len = msg.len < MAVLINK_MSG_ID_AUTOPILOT_VERSION_LEN? msg.len : MAVLINK_MSG_ID_AUTOPILOT_VERSION_LEN;
+        FMemory::Memset(this, 0, MAVLINK_MSG_ID_AUTOPILOT_VERSION_LEN);
+        FMemory::Memcpy(this, _MAV_PAYLOAD(&msg), len);
+    #endif
 }
 

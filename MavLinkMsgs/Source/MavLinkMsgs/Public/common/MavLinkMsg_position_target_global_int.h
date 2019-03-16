@@ -10,7 +10,7 @@ USTRUCT(BlueprintType)
 struct MAVLINKMSGS_API FMavlinkMsg_position_target_global_int
 {
     GENERATED_BODY()
-
+    
     static const uint32 MsgId = 87;
     /*Timestamp (time since system boot). The rationale for the timestamp in the setpoint is to allow the system to compensate for the transport delay of the setpoint. This allows the system to compensate processing latency. [ms]*/
     UPROPERTY()

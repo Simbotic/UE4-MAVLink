@@ -10,7 +10,7 @@ USTRUCT(BlueprintType)
 struct MAVLINKMSGS_API FMavlinkMsg_autopilot_version
 {
     GENERATED_BODY()
-
+    
     static const uint32 MsgId = 148;
     /*Bitmap of capabilities */
     UPROPERTY()

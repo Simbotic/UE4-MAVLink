@@ -20,6 +20,24 @@ void FMavlinkMsg_optical_flow_rad::Serialize(uint8 systemId, uint8 componentId, 
 
 void FMavlinkMsg_optical_flow_rad::Deserialize(const mavlink_message_t& msg)
 {
-
+    #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+        time_usec = mavlink_msg_optical_flow_rad_get_time_usec(msg);
+        integration_time_us = mavlink_msg_optical_flow_rad_get_integration_time_us(msg);
+        integrated_x = mavlink_msg_optical_flow_rad_get_integrated_x(msg);
+        integrated_y = mavlink_msg_optical_flow_rad_get_integrated_y(msg);
+        integrated_xgyro = mavlink_msg_optical_flow_rad_get_integrated_xgyro(msg);
+        integrated_ygyro = mavlink_msg_optical_flow_rad_get_integrated_ygyro(msg);
+        integrated_zgyro = mavlink_msg_optical_flow_rad_get_integrated_zgyro(msg);
+        time_delta_distance_us = mavlink_msg_optical_flow_rad_get_time_delta_distance_us(msg);
+        distance = mavlink_msg_optical_flow_rad_get_distance(msg);
+        temperature = mavlink_msg_optical_flow_rad_get_temperature(msg);
+        sensor_id = mavlink_msg_optical_flow_rad_get_sensor_id(msg);
+        quality = mavlink_msg_optical_flow_rad_get_quality(msg);
+    
+    #else
+        uint8_t len = msg.len < MAVLINK_MSG_ID_OPTICAL_FLOW_RAD_LEN? msg.len : MAVLINK_MSG_ID_OPTICAL_FLOW_RAD_LEN;
+        FMemory::Memset(this, 0, MAVLINK_MSG_ID_OPTICAL_FLOW_RAD_LEN);
+        FMemory::Memcpy(this, _MAV_PAYLOAD(&msg), len);
+    #endif
 }
 

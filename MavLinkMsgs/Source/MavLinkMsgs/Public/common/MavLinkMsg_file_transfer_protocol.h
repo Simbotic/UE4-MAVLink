@@ -10,7 +10,7 @@ USTRUCT(BlueprintType)
 struct MAVLINKMSGS_API FMavlinkMsg_file_transfer_protocol
 {
     GENERATED_BODY()
-
+    
     static const uint32 MsgId = 110;
     /*Network ID (0 for broadcast) */
     UPROPERTY()

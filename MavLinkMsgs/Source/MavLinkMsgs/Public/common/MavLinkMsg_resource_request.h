@@ -10,7 +10,7 @@ USTRUCT(BlueprintType)
 struct MAVLINKMSGS_API FMavlinkMsg_resource_request
 {
     GENERATED_BODY()
-
+    
     static const uint32 MsgId = 142;
     /*Request ID. This ID should be re-used when sending back URI contents */
     UPROPERTY()

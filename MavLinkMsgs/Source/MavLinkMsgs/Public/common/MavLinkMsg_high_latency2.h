@@ -10,7 +10,7 @@ USTRUCT(BlueprintType)
 struct MAVLINKMSGS_API FMavlinkMsg_high_latency2
 {
     GENERATED_BODY()
-
+    
     static const uint32 MsgId = 235;
     /*Timestamp (milliseconds since boot or Unix epoch) [ms]*/
     UPROPERTY()

@@ -10,7 +10,7 @@ USTRUCT(BlueprintType)
 struct MAVLINKMSGS_API FMavlinkMsg_camera_image_captured
 {
     GENERATED_BODY()
-
+    
     static const uint32 MsgId = 263;
     /*Timestamp (time since system boot). [ms]*/
     UPROPERTY()

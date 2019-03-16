@@ -10,7 +10,7 @@ USTRUCT(BlueprintType)
 struct MAVLINKMSGS_API FMavlinkMsg_home_position
 {
     GENERATED_BODY()
-
+    
     static const uint32 MsgId = 242;
     /*Latitude (WGS84) [degE7]*/
     UPROPERTY()

@@ -20,6 +20,16 @@ void FMavlinkMsg_change_operator_control::Serialize(uint8 systemId, uint8 compon
 
 void FMavlinkMsg_change_operator_control::Deserialize(const mavlink_message_t& msg)
 {
-
+    #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+        target_system = mavlink_msg_change_operator_control_get_target_system(msg);
+        control_request = mavlink_msg_change_operator_control_get_control_request(msg);
+        version = mavlink_msg_change_operator_control_get_version(msg);
+        passkey = mavlink_msg_change_operator_control_get_passkey(msg, change_operator_control->passkey);
+    
+    #else
+        uint8_t len = msg.len < MAVLINK_MSG_ID_CHANGE_OPERATOR_CONTROL_LEN? msg.len : MAVLINK_MSG_ID_CHANGE_OPERATOR_CONTROL_LEN;
+        FMemory::Memset(this, 0, MAVLINK_MSG_ID_CHANGE_OPERATOR_CONTROL_LEN);
+        FMemory::Memcpy(this, _MAV_PAYLOAD(&msg), len);
+    #endif
 }
 

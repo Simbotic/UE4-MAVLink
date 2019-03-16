@@ -20,6 +20,18 @@ void FMavlinkMsg_attitude_quaternion_cov::Serialize(uint8 systemId, uint8 compon
 
 void FMavlinkMsg_attitude_quaternion_cov::Deserialize(const mavlink_message_t& msg)
 {
-
+    #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+        time_usec = mavlink_msg_attitude_quaternion_cov_get_time_usec(msg);
+        q = mavlink_msg_attitude_quaternion_cov_get_q(msg, attitude_quaternion_cov->q);
+        rollspeed = mavlink_msg_attitude_quaternion_cov_get_rollspeed(msg);
+        pitchspeed = mavlink_msg_attitude_quaternion_cov_get_pitchspeed(msg);
+        yawspeed = mavlink_msg_attitude_quaternion_cov_get_yawspeed(msg);
+        covariance = mavlink_msg_attitude_quaternion_cov_get_covariance(msg, attitude_quaternion_cov->covariance);
+    
+    #else
+        uint8_t len = msg.len < MAVLINK_MSG_ID_ATTITUDE_QUATERNION_COV_LEN? msg.len : MAVLINK_MSG_ID_ATTITUDE_QUATERNION_COV_LEN;
+        FMemory::Memset(this, 0, MAVLINK_MSG_ID_ATTITUDE_QUATERNION_COV_LEN);
+        FMemory::Memcpy(this, _MAV_PAYLOAD(&msg), len);
+    #endif
 }
 

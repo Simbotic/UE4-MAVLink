@@ -10,7 +10,7 @@ USTRUCT(BlueprintType)
 struct MAVLINKMSGS_API FMavlinkMsg_set_mode
 {
     GENERATED_BODY()
-
+    
     static const uint32 MsgId = 11;
     /*The system setting the mode */
     UPROPERTY()

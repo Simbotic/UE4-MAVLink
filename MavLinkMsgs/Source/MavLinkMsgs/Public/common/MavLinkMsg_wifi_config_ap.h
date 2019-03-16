@@ -10,7 +10,7 @@ USTRUCT(BlueprintType)
 struct MAVLINKMSGS_API FMavlinkMsg_wifi_config_ap
 {
     GENERATED_BODY()
-
+    
     static const uint32 MsgId = 299;
     /*Name of Wi-Fi network (SSID). Leave it blank to leave it unchanged. */
     UPROPERTY()

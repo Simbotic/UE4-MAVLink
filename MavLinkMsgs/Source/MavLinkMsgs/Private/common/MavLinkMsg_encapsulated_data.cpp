@@ -20,6 +20,14 @@ void FMavlinkMsg_encapsulated_data::Serialize(uint8 systemId, uint8 componentId,
 
 void FMavlinkMsg_encapsulated_data::Deserialize(const mavlink_message_t& msg)
 {
-
+    #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+        seqnr = mavlink_msg_encapsulated_data_get_seqnr(msg);
+        data = mavlink_msg_encapsulated_data_get_data(msg, encapsulated_data->data);
+    
+    #else
+        uint8_t len = msg.len < MAVLINK_MSG_ID_ENCAPSULATED_DATA_LEN? msg.len : MAVLINK_MSG_ID_ENCAPSULATED_DATA_LEN;
+        FMemory::Memset(this, 0, MAVLINK_MSG_ID_ENCAPSULATED_DATA_LEN);
+        FMemory::Memcpy(this, _MAV_PAYLOAD(&msg), len);
+    #endif
 }
 

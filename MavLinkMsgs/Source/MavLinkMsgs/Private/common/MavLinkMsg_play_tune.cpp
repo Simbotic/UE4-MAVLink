@@ -20,6 +20,16 @@ void FMavlinkMsg_play_tune::Serialize(uint8 systemId, uint8 componentId, TShared
 
 void FMavlinkMsg_play_tune::Deserialize(const mavlink_message_t& msg)
 {
-
+    #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+        target_system = mavlink_msg_play_tune_get_target_system(msg);
+        target_component = mavlink_msg_play_tune_get_target_component(msg);
+        tune = mavlink_msg_play_tune_get_tune(msg, play_tune->tune);
+        tune2 = mavlink_msg_play_tune_get_tune2(msg, play_tune->tune2);
+    
+    #else
+        uint8_t len = msg.len < MAVLINK_MSG_ID_PLAY_TUNE_LEN? msg.len : MAVLINK_MSG_ID_PLAY_TUNE_LEN;
+        FMemory::Memset(this, 0, MAVLINK_MSG_ID_PLAY_TUNE_LEN);
+        FMemory::Memcpy(this, _MAV_PAYLOAD(&msg), len);
+    #endif
 }
 

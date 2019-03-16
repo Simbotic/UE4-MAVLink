@@ -10,7 +10,7 @@ USTRUCT(BlueprintType)
 struct MAVLINKMSGS_API FMavlinkMsg_sim_state
 {
     GENERATED_BODY()
-
+    
     static const uint32 MsgId = 108;
     /*True attitude quaternion component 1, w (1 in null-rotation) */
     UPROPERTY()

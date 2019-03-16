@@ -20,6 +20,16 @@ void FMavlinkMsg_gps_inject_data::Serialize(uint8 systemId, uint8 componentId, T
 
 void FMavlinkMsg_gps_inject_data::Deserialize(const mavlink_message_t& msg)
 {
-
+    #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+        target_system = mavlink_msg_gps_inject_data_get_target_system(msg);
+        target_component = mavlink_msg_gps_inject_data_get_target_component(msg);
+        len = mavlink_msg_gps_inject_data_get_len(msg);
+        data = mavlink_msg_gps_inject_data_get_data(msg, gps_inject_data->data);
+    
+    #else
+        uint8_t len = msg.len < MAVLINK_MSG_ID_GPS_INJECT_DATA_LEN? msg.len : MAVLINK_MSG_ID_GPS_INJECT_DATA_LEN;
+        FMemory::Memset(this, 0, MAVLINK_MSG_ID_GPS_INJECT_DATA_LEN);
+        FMemory::Memcpy(this, _MAV_PAYLOAD(&msg), len);
+    #endif
 }
 

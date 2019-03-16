@@ -10,7 +10,7 @@ USTRUCT(BlueprintType)
 struct MAVLINKMSGS_API FMavlinkMsg_scaled_pressure2
 {
     GENERATED_BODY()
-
+    
     static const uint32 MsgId = 137;
     /*Timestamp (time since system boot). [ms]*/
     UPROPERTY()

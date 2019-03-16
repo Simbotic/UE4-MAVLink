@@ -20,6 +20,20 @@ void FMavlinkMsg_video_stream_status::Serialize(uint8 systemId, uint8 componentI
 
 void FMavlinkMsg_video_stream_status::Deserialize(const mavlink_message_t& msg)
 {
-
+    #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+        framerate = mavlink_msg_video_stream_status_get_framerate(msg);
+        bitrate = mavlink_msg_video_stream_status_get_bitrate(msg);
+        flags = mavlink_msg_video_stream_status_get_flags(msg);
+        resolution_h = mavlink_msg_video_stream_status_get_resolution_h(msg);
+        resolution_v = mavlink_msg_video_stream_status_get_resolution_v(msg);
+        rotation = mavlink_msg_video_stream_status_get_rotation(msg);
+        hfov = mavlink_msg_video_stream_status_get_hfov(msg);
+        stream_id = mavlink_msg_video_stream_status_get_stream_id(msg);
+    
+    #else
+        uint8_t len = msg.len < MAVLINK_MSG_ID_VIDEO_STREAM_STATUS_LEN? msg.len : MAVLINK_MSG_ID_VIDEO_STREAM_STATUS_LEN;
+        FMemory::Memset(this, 0, MAVLINK_MSG_ID_VIDEO_STREAM_STATUS_LEN);
+        FMemory::Memcpy(this, _MAV_PAYLOAD(&msg), len);
+    #endif
 }
 

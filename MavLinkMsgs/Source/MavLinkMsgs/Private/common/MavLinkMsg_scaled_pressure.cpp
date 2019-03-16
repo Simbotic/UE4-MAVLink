@@ -20,6 +20,16 @@ void FMavlinkMsg_scaled_pressure::Serialize(uint8 systemId, uint8 componentId, T
 
 void FMavlinkMsg_scaled_pressure::Deserialize(const mavlink_message_t& msg)
 {
-
+    #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+        time_boot_ms = mavlink_msg_scaled_pressure_get_time_boot_ms(msg);
+        press_abs = mavlink_msg_scaled_pressure_get_press_abs(msg);
+        press_diff = mavlink_msg_scaled_pressure_get_press_diff(msg);
+        temperature = mavlink_msg_scaled_pressure_get_temperature(msg);
+    
+    #else
+        uint8_t len = msg.len < MAVLINK_MSG_ID_SCALED_PRESSURE_LEN? msg.len : MAVLINK_MSG_ID_SCALED_PRESSURE_LEN;
+        FMemory::Memset(this, 0, MAVLINK_MSG_ID_SCALED_PRESSURE_LEN);
+        FMemory::Memcpy(this, _MAV_PAYLOAD(&msg), len);
+    #endif
 }
 

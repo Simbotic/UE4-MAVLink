@@ -20,6 +20,14 @@ void FMavlinkMsg_statustext_long::Serialize(uint8 systemId, uint8 componentId, T
 
 void FMavlinkMsg_statustext_long::Deserialize(const mavlink_message_t& msg)
 {
-
+    #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+        severity = mavlink_msg_statustext_long_get_severity(msg);
+        text = mavlink_msg_statustext_long_get_text(msg, statustext_long->text);
+    
+    #else
+        uint8_t len = msg.len < MAVLINK_MSG_ID_STATUSTEXT_LONG_LEN? msg.len : MAVLINK_MSG_ID_STATUSTEXT_LONG_LEN;
+        FMemory::Memset(this, 0, MAVLINK_MSG_ID_STATUSTEXT_LONG_LEN);
+        FMemory::Memcpy(this, _MAV_PAYLOAD(&msg), len);
+    #endif
 }
 

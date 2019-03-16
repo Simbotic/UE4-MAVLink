@@ -20,6 +20,14 @@ void FMavlinkMsg_log_request_end::Serialize(uint8 systemId, uint8 componentId, T
 
 void FMavlinkMsg_log_request_end::Deserialize(const mavlink_message_t& msg)
 {
-
+    #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+        target_system = mavlink_msg_log_request_end_get_target_system(msg);
+        target_component = mavlink_msg_log_request_end_get_target_component(msg);
+    
+    #else
+        uint8_t len = msg.len < MAVLINK_MSG_ID_LOG_REQUEST_END_LEN? msg.len : MAVLINK_MSG_ID_LOG_REQUEST_END_LEN;
+        FMemory::Memset(this, 0, MAVLINK_MSG_ID_LOG_REQUEST_END_LEN);
+        FMemory::Memcpy(this, _MAV_PAYLOAD(&msg), len);
+    #endif
 }
 

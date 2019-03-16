@@ -10,7 +10,7 @@ USTRUCT(BlueprintType)
 struct MAVLINKMSGS_API FMavlinkMsg_statustext_long
 {
     GENERATED_BODY()
-
+    
     static const uint32 MsgId = 365;
     /*Severity of status. Relies on the definitions within RFC-5424. */
     UPROPERTY()

@@ -20,6 +20,26 @@ void FMavlinkMsg_landing_target::Serialize(uint8 systemId, uint8 componentId, TS
 
 void FMavlinkMsg_landing_target::Deserialize(const mavlink_message_t& msg)
 {
-
+    #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+        time_usec = mavlink_msg_landing_target_get_time_usec(msg);
+        angle_x = mavlink_msg_landing_target_get_angle_x(msg);
+        angle_y = mavlink_msg_landing_target_get_angle_y(msg);
+        distance = mavlink_msg_landing_target_get_distance(msg);
+        size_x = mavlink_msg_landing_target_get_size_x(msg);
+        size_y = mavlink_msg_landing_target_get_size_y(msg);
+        target_num = mavlink_msg_landing_target_get_target_num(msg);
+        frame = mavlink_msg_landing_target_get_frame(msg);
+        x = mavlink_msg_landing_target_get_x(msg);
+        y = mavlink_msg_landing_target_get_y(msg);
+        z = mavlink_msg_landing_target_get_z(msg);
+        q = mavlink_msg_landing_target_get_q(msg, landing_target->q);
+        type = mavlink_msg_landing_target_get_type(msg);
+        position_valid = mavlink_msg_landing_target_get_position_valid(msg);
+    
+    #else
+        uint8_t len = msg.len < MAVLINK_MSG_ID_LANDING_TARGET_LEN? msg.len : MAVLINK_MSG_ID_LANDING_TARGET_LEN;
+        FMemory::Memset(this, 0, MAVLINK_MSG_ID_LANDING_TARGET_LEN);
+        FMemory::Memcpy(this, _MAV_PAYLOAD(&msg), len);
+    #endif
 }
 

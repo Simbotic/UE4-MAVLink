@@ -20,6 +20,14 @@ void FMavlinkMsg_extended_sys_state::Serialize(uint8 systemId, uint8 componentId
 
 void FMavlinkMsg_extended_sys_state::Deserialize(const mavlink_message_t& msg)
 {
-
+    #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+        vtol_state = mavlink_msg_extended_sys_state_get_vtol_state(msg);
+        landed_state = mavlink_msg_extended_sys_state_get_landed_state(msg);
+    
+    #else
+        uint8_t len = msg.len < MAVLINK_MSG_ID_EXTENDED_SYS_STATE_LEN? msg.len : MAVLINK_MSG_ID_EXTENDED_SYS_STATE_LEN;
+        FMemory::Memset(this, 0, MAVLINK_MSG_ID_EXTENDED_SYS_STATE_LEN);
+        FMemory::Memcpy(this, _MAV_PAYLOAD(&msg), len);
+    #endif
 }
 

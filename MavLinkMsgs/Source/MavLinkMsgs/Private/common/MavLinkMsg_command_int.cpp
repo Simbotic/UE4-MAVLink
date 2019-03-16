@@ -20,6 +20,25 @@ void FMavlinkMsg_command_int::Serialize(uint8 systemId, uint8 componentId, TShar
 
 void FMavlinkMsg_command_int::Deserialize(const mavlink_message_t& msg)
 {
-
+    #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+        param1 = mavlink_msg_command_int_get_param1(msg);
+        param2 = mavlink_msg_command_int_get_param2(msg);
+        param3 = mavlink_msg_command_int_get_param3(msg);
+        param4 = mavlink_msg_command_int_get_param4(msg);
+        x = mavlink_msg_command_int_get_x(msg);
+        y = mavlink_msg_command_int_get_y(msg);
+        z = mavlink_msg_command_int_get_z(msg);
+        command = mavlink_msg_command_int_get_command(msg);
+        target_system = mavlink_msg_command_int_get_target_system(msg);
+        target_component = mavlink_msg_command_int_get_target_component(msg);
+        frame = mavlink_msg_command_int_get_frame(msg);
+        current = mavlink_msg_command_int_get_current(msg);
+        autocontinue = mavlink_msg_command_int_get_autocontinue(msg);
+    
+    #else
+        uint8_t len = msg.len < MAVLINK_MSG_ID_COMMAND_INT_LEN? msg.len : MAVLINK_MSG_ID_COMMAND_INT_LEN;
+        FMemory::Memset(this, 0, MAVLINK_MSG_ID_COMMAND_INT_LEN);
+        FMemory::Memcpy(this, _MAV_PAYLOAD(&msg), len);
+    #endif
 }
 

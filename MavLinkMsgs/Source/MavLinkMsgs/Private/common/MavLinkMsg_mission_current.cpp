@@ -20,6 +20,13 @@ void FMavlinkMsg_mission_current::Serialize(uint8 systemId, uint8 componentId, T
 
 void FMavlinkMsg_mission_current::Deserialize(const mavlink_message_t& msg)
 {
-
+    #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+        seq = mavlink_msg_mission_current_get_seq(msg);
+    
+    #else
+        uint8_t len = msg.len < MAVLINK_MSG_ID_MISSION_CURRENT_LEN? msg.len : MAVLINK_MSG_ID_MISSION_CURRENT_LEN;
+        FMemory::Memset(this, 0, MAVLINK_MSG_ID_MISSION_CURRENT_LEN);
+        FMemory::Memcpy(this, _MAV_PAYLOAD(&msg), len);
+    #endif
 }
 

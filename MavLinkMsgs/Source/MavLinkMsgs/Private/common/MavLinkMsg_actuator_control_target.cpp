@@ -20,6 +20,15 @@ void FMavlinkMsg_actuator_control_target::Serialize(uint8 systemId, uint8 compon
 
 void FMavlinkMsg_actuator_control_target::Deserialize(const mavlink_message_t& msg)
 {
-
+    #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+        time_usec = mavlink_msg_actuator_control_target_get_time_usec(msg);
+        controls = mavlink_msg_actuator_control_target_get_controls(msg, actuator_control_target->controls);
+        group_mlx = mavlink_msg_actuator_control_target_get_group_mlx(msg);
+    
+    #else
+        uint8_t len = msg.len < MAVLINK_MSG_ID_ACTUATOR_CONTROL_TARGET_LEN? msg.len : MAVLINK_MSG_ID_ACTUATOR_CONTROL_TARGET_LEN;
+        FMemory::Memset(this, 0, MAVLINK_MSG_ID_ACTUATOR_CONTROL_TARGET_LEN);
+        FMemory::Memcpy(this, _MAV_PAYLOAD(&msg), len);
+    #endif
 }
 

@@ -10,7 +10,7 @@ USTRUCT(BlueprintType)
 struct MAVLINKMSGS_API FMavlinkMsg_mission_item_reached
 {
     GENERATED_BODY()
-
+    
     static const uint32 MsgId = 46;
     /*Sequence */
     UPROPERTY()

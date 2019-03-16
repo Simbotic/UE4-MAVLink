@@ -10,7 +10,7 @@ USTRUCT(BlueprintType)
 struct MAVLINKMSGS_API FMavlinkMsg_memory_vect
 {
     GENERATED_BODY()
-
+    
     static const uint32 MsgId = 249;
     /*Starting address of the debug variables */
     UPROPERTY()

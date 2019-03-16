@@ -10,7 +10,7 @@ USTRUCT(BlueprintType)
 struct MAVLINKMSGS_API FMavlinkMsg_wheel_distance
 {
     GENERATED_BODY()
-
+    
     static const uint32 MsgId = 9000;
     /*Timestamp (synced to UNIX time or since system boot). [us]*/
     UPROPERTY()

@@ -20,6 +20,14 @@ void FMavlinkMsg_timesync::Serialize(uint8 systemId, uint8 componentId, TSharedR
 
 void FMavlinkMsg_timesync::Deserialize(const mavlink_message_t& msg)
 {
-
+    #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+        tc1 = mavlink_msg_timesync_get_tc1(msg);
+        ts1 = mavlink_msg_timesync_get_ts1(msg);
+    
+    #else
+        uint8_t len = msg.len < MAVLINK_MSG_ID_TIMESYNC_LEN? msg.len : MAVLINK_MSG_ID_TIMESYNC_LEN;
+        FMemory::Memset(this, 0, MAVLINK_MSG_ID_TIMESYNC_LEN);
+        FMemory::Memcpy(this, _MAV_PAYLOAD(&msg), len);
+    #endif
 }
 

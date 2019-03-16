@@ -10,7 +10,7 @@ USTRUCT(BlueprintType)
 struct MAVLINKMSGS_API FMavlinkMsg_data_stream
 {
     GENERATED_BODY()
-
+    
     static const uint32 MsgId = 67;
     /*The ID of the requested data stream */
     UPROPERTY()

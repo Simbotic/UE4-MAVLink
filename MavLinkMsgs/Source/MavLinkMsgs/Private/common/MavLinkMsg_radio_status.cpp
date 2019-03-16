@@ -20,6 +20,19 @@ void FMavlinkMsg_radio_status::Serialize(uint8 systemId, uint8 componentId, TSha
 
 void FMavlinkMsg_radio_status::Deserialize(const mavlink_message_t& msg)
 {
-
+    #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+        rxerrors = mavlink_msg_radio_status_get_rxerrors(msg);
+        fixed = mavlink_msg_radio_status_get_fixed(msg);
+        rssi = mavlink_msg_radio_status_get_rssi(msg);
+        remrssi = mavlink_msg_radio_status_get_remrssi(msg);
+        txbuf = mavlink_msg_radio_status_get_txbuf(msg);
+        noise = mavlink_msg_radio_status_get_noise(msg);
+        remnoise = mavlink_msg_radio_status_get_remnoise(msg);
+    
+    #else
+        uint8_t len = msg.len < MAVLINK_MSG_ID_RADIO_STATUS_LEN? msg.len : MAVLINK_MSG_ID_RADIO_STATUS_LEN;
+        FMemory::Memset(this, 0, MAVLINK_MSG_ID_RADIO_STATUS_LEN);
+        FMemory::Memcpy(this, _MAV_PAYLOAD(&msg), len);
+    #endif
 }
 

@@ -10,7 +10,7 @@ USTRUCT(BlueprintType)
 struct MAVLINKMSGS_API FMavlinkMsg_gps_inject_data
 {
     GENERATED_BODY()
-
+    
     static const uint32 MsgId = 123;
     /*System ID */
     UPROPERTY()

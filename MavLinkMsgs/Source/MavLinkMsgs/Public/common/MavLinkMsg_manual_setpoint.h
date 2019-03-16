@@ -10,7 +10,7 @@ USTRUCT(BlueprintType)
 struct MAVLINKMSGS_API FMavlinkMsg_manual_setpoint
 {
     GENERATED_BODY()
-
+    
     static const uint32 MsgId = 81;
     /*Timestamp (time since system boot). [ms]*/
     UPROPERTY()

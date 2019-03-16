@@ -20,6 +20,18 @@ void FMavlinkMsg_serial_control::Serialize(uint8 systemId, uint8 componentId, TS
 
 void FMavlinkMsg_serial_control::Deserialize(const mavlink_message_t& msg)
 {
-
+    #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+        baudrate = mavlink_msg_serial_control_get_baudrate(msg);
+        timeout = mavlink_msg_serial_control_get_timeout(msg);
+        device = mavlink_msg_serial_control_get_device(msg);
+        flags = mavlink_msg_serial_control_get_flags(msg);
+        count = mavlink_msg_serial_control_get_count(msg);
+        data = mavlink_msg_serial_control_get_data(msg, serial_control->data);
+    
+    #else
+        uint8_t len = msg.len < MAVLINK_MSG_ID_SERIAL_CONTROL_LEN? msg.len : MAVLINK_MSG_ID_SERIAL_CONTROL_LEN;
+        FMemory::Memset(this, 0, MAVLINK_MSG_ID_SERIAL_CONTROL_LEN);
+        FMemory::Memcpy(this, _MAV_PAYLOAD(&msg), len);
+    #endif
 }
 

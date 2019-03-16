@@ -10,7 +10,7 @@ USTRUCT(BlueprintType)
 struct MAVLINKMSGS_API FMavlinkMsg_gps_status
 {
     GENERATED_BODY()
-
+    
     static const uint32 MsgId = 25;
     /*Number of satellites visible */
     UPROPERTY()

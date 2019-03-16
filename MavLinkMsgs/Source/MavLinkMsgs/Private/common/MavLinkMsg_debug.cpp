@@ -20,6 +20,15 @@ void FMavlinkMsg_debug::Serialize(uint8 systemId, uint8 componentId, TSharedRef<
 
 void FMavlinkMsg_debug::Deserialize(const mavlink_message_t& msg)
 {
-
+    #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+        time_boot_ms = mavlink_msg_debug_get_time_boot_ms(msg);
+        value = mavlink_msg_debug_get_value(msg);
+        ind = mavlink_msg_debug_get_ind(msg);
+    
+    #else
+        uint8_t len = msg.len < MAVLINK_MSG_ID_DEBUG_LEN? msg.len : MAVLINK_MSG_ID_DEBUG_LEN;
+        FMemory::Memset(this, 0, MAVLINK_MSG_ID_DEBUG_LEN);
+        FMemory::Memcpy(this, _MAV_PAYLOAD(&msg), len);
+    #endif
 }
 

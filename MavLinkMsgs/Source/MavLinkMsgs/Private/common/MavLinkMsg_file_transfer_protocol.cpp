@@ -20,6 +20,16 @@ void FMavlinkMsg_file_transfer_protocol::Serialize(uint8 systemId, uint8 compone
 
 void FMavlinkMsg_file_transfer_protocol::Deserialize(const mavlink_message_t& msg)
 {
-
+    #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+        target_network = mavlink_msg_file_transfer_protocol_get_target_network(msg);
+        target_system = mavlink_msg_file_transfer_protocol_get_target_system(msg);
+        target_component = mavlink_msg_file_transfer_protocol_get_target_component(msg);
+        payload = mavlink_msg_file_transfer_protocol_get_payload(msg, file_transfer_protocol->payload);
+    
+    #else
+        uint8_t len = msg.len < MAVLINK_MSG_ID_FILE_TRANSFER_PROTOCOL_LEN? msg.len : MAVLINK_MSG_ID_FILE_TRANSFER_PROTOCOL_LEN;
+        FMemory::Memset(this, 0, MAVLINK_MSG_ID_FILE_TRANSFER_PROTOCOL_LEN);
+        FMemory::Memcpy(this, _MAV_PAYLOAD(&msg), len);
+    #endif
 }
 

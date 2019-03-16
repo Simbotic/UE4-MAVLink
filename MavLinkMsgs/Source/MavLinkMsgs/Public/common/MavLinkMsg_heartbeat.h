@@ -10,7 +10,7 @@ USTRUCT(BlueprintType)
 struct MAVLINKMSGS_API FMavlinkMsg_heartbeat
 {
     GENERATED_BODY()
-
+    
     static const uint32 MsgId = 0;
     /*Type of the system (quadrotor, helicopter, etc.). Components use the same type as their associated system. */
     UPROPERTY()

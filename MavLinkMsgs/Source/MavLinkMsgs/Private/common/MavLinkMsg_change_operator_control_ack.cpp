@@ -20,6 +20,15 @@ void FMavlinkMsg_change_operator_control_ack::Serialize(uint8 systemId, uint8 co
 
 void FMavlinkMsg_change_operator_control_ack::Deserialize(const mavlink_message_t& msg)
 {
-
+    #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+        gcs_system_id = mavlink_msg_change_operator_control_ack_get_gcs_system_id(msg);
+        control_request = mavlink_msg_change_operator_control_ack_get_control_request(msg);
+        ack = mavlink_msg_change_operator_control_ack_get_ack(msg);
+    
+    #else
+        uint8_t len = msg.len < MAVLINK_MSG_ID_CHANGE_OPERATOR_CONTROL_ACK_LEN? msg.len : MAVLINK_MSG_ID_CHANGE_OPERATOR_CONTROL_ACK_LEN;
+        FMemory::Memset(this, 0, MAVLINK_MSG_ID_CHANGE_OPERATOR_CONTROL_ACK_LEN);
+        FMemory::Memcpy(this, _MAV_PAYLOAD(&msg), len);
+    #endif
 }
 

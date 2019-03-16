@@ -1,4 +1,6 @@
 #pragma once
+
+#include "MavLinkUtils.h"
  #include "MavLinkMsg_heartbeat.h"
  #include "MavLinkMsg_sys_status.h"
  #include "MavLinkMsg_system_time.h"
@@ -172,3 +174,4 @@
  #include "MavLinkMsg_smart_battery_info.h"
  #include "MavLinkMsg_smart_battery_status.h"
  #include "MavLinkMsg_wheel_distance.h"
+

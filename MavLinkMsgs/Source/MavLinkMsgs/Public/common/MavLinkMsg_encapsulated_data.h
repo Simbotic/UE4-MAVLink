@@ -10,7 +10,7 @@ USTRUCT(BlueprintType)
 struct MAVLINKMSGS_API FMavlinkMsg_encapsulated_data
 {
     GENERATED_BODY()
-
+    
     static const uint32 MsgId = 131;
     /*sequence number (starting with 0 on every transmission) */
     UPROPERTY()

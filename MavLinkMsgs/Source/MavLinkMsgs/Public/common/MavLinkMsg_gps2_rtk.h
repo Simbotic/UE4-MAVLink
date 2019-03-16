@@ -10,7 +10,7 @@ USTRUCT(BlueprintType)
 struct MAVLINKMSGS_API FMavlinkMsg_gps2_rtk
 {
     GENERATED_BODY()
-
+    
     static const uint32 MsgId = 128;
     /*Time since boot of last baseline message received. [ms]*/
     UPROPERTY()

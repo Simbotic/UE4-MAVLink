@@ -20,6 +20,24 @@ void FMavlinkMsg_set_home_position::Serialize(uint8 systemId, uint8 componentId,
 
 void FMavlinkMsg_set_home_position::Deserialize(const mavlink_message_t& msg)
 {
-
+    #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+        latitude = mavlink_msg_set_home_position_get_latitude(msg);
+        longitude = mavlink_msg_set_home_position_get_longitude(msg);
+        altitude = mavlink_msg_set_home_position_get_altitude(msg);
+        x = mavlink_msg_set_home_position_get_x(msg);
+        y = mavlink_msg_set_home_position_get_y(msg);
+        z = mavlink_msg_set_home_position_get_z(msg);
+        q = mavlink_msg_set_home_position_get_q(msg, set_home_position->q);
+        approach_x = mavlink_msg_set_home_position_get_approach_x(msg);
+        approach_y = mavlink_msg_set_home_position_get_approach_y(msg);
+        approach_z = mavlink_msg_set_home_position_get_approach_z(msg);
+        target_system = mavlink_msg_set_home_position_get_target_system(msg);
+        time_usec = mavlink_msg_set_home_position_get_time_usec(msg);
+    
+    #else
+        uint8_t len = msg.len < MAVLINK_MSG_ID_SET_HOME_POSITION_LEN? msg.len : MAVLINK_MSG_ID_SET_HOME_POSITION_LEN;
+        FMemory::Memset(this, 0, MAVLINK_MSG_ID_SET_HOME_POSITION_LEN);
+        FMemory::Memcpy(this, _MAV_PAYLOAD(&msg), len);
+    #endif
 }
 

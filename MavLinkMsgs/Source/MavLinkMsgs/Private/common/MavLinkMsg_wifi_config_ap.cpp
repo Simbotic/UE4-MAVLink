@@ -20,6 +20,14 @@ void FMavlinkMsg_wifi_config_ap::Serialize(uint8 systemId, uint8 componentId, TS
 
 void FMavlinkMsg_wifi_config_ap::Deserialize(const mavlink_message_t& msg)
 {
-
+    #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+        ssid = mavlink_msg_wifi_config_ap_get_ssid(msg, wifi_config_ap->ssid);
+        password = mavlink_msg_wifi_config_ap_get_password(msg, wifi_config_ap->password);
+    
+    #else
+        uint8_t len = msg.len < MAVLINK_MSG_ID_WIFI_CONFIG_AP_LEN? msg.len : MAVLINK_MSG_ID_WIFI_CONFIG_AP_LEN;
+        FMemory::Memset(this, 0, MAVLINK_MSG_ID_WIFI_CONFIG_AP_LEN);
+        FMemory::Memcpy(this, _MAV_PAYLOAD(&msg), len);
+    #endif
 }
 

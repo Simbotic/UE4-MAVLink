@@ -20,6 +20,19 @@ void FMavlinkMsg_data_transmission_handshake::Serialize(uint8 systemId, uint8 co
 
 void FMavlinkMsg_data_transmission_handshake::Deserialize(const mavlink_message_t& msg)
 {
-
+    #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+        size = mavlink_msg_data_transmission_handshake_get_size(msg);
+        width = mavlink_msg_data_transmission_handshake_get_width(msg);
+        height = mavlink_msg_data_transmission_handshake_get_height(msg);
+        packets = mavlink_msg_data_transmission_handshake_get_packets(msg);
+        type = mavlink_msg_data_transmission_handshake_get_type(msg);
+        payload = mavlink_msg_data_transmission_handshake_get_payload(msg);
+        jpg_quality = mavlink_msg_data_transmission_handshake_get_jpg_quality(msg);
+    
+    #else
+        uint8_t len = msg.len < MAVLINK_MSG_ID_DATA_TRANSMISSION_HANDSHAKE_LEN? msg.len : MAVLINK_MSG_ID_DATA_TRANSMISSION_HANDSHAKE_LEN;
+        FMemory::Memset(this, 0, MAVLINK_MSG_ID_DATA_TRANSMISSION_HANDSHAKE_LEN);
+        FMemory::Memcpy(this, _MAV_PAYLOAD(&msg), len);
+    #endif
 }
 

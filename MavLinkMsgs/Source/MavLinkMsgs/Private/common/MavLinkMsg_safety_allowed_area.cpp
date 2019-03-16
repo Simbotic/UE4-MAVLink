@@ -20,6 +20,19 @@ void FMavlinkMsg_safety_allowed_area::Serialize(uint8 systemId, uint8 componentI
 
 void FMavlinkMsg_safety_allowed_area::Deserialize(const mavlink_message_t& msg)
 {
-
+    #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+        p1x = mavlink_msg_safety_allowed_area_get_p1x(msg);
+        p1y = mavlink_msg_safety_allowed_area_get_p1y(msg);
+        p1z = mavlink_msg_safety_allowed_area_get_p1z(msg);
+        p2x = mavlink_msg_safety_allowed_area_get_p2x(msg);
+        p2y = mavlink_msg_safety_allowed_area_get_p2y(msg);
+        p2z = mavlink_msg_safety_allowed_area_get_p2z(msg);
+        frame = mavlink_msg_safety_allowed_area_get_frame(msg);
+    
+    #else
+        uint8_t len = msg.len < MAVLINK_MSG_ID_SAFETY_ALLOWED_AREA_LEN? msg.len : MAVLINK_MSG_ID_SAFETY_ALLOWED_AREA_LEN;
+        FMemory::Memset(this, 0, MAVLINK_MSG_ID_SAFETY_ALLOWED_AREA_LEN);
+        FMemory::Memcpy(this, _MAV_PAYLOAD(&msg), len);
+    #endif
 }
 

@@ -10,7 +10,7 @@ USTRUCT(BlueprintType)
 struct MAVLINKMSGS_API FMavlinkMsg_terrain_data
 {
     GENERATED_BODY()
-
+    
     static const uint32 MsgId = 134;
     /*Latitude of SW corner of first grid [degE7]*/
     UPROPERTY()

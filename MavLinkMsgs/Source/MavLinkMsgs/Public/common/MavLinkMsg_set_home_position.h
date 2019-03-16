@@ -10,7 +10,7 @@ USTRUCT(BlueprintType)
 struct MAVLINKMSGS_API FMavlinkMsg_set_home_position
 {
     GENERATED_BODY()
-
+    
     static const uint32 MsgId = 243;
     /*System ID. */
     UPROPERTY()
